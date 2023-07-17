@@ -8,12 +8,15 @@ function Homepage() {
                     <div className="hero-text-container">
                         <h1 className="display-title">Little Lemon</h1>
                         <h2 className="sub-title">Chicago</h2>
-                        <p className="lead-text">We are a family owned Mediterranean restaurant, 
-                                                focused on traditional recipes served with a modern twist
+                    </div>
+                    <div className="hero-lead-text-button-container">
+                        <p className="lead-text">
+                            We are a family owned Mediterranean restaurant, 
+                            focused on traditional recipes served with a modern twist
                         </p>
                         <button className="reserve-table-button btn">Reserve a Table</button>
                     </div>
-                <img className="hero-image" src={restaurantfood} width="332" height="362"/>
+                    <img className="hero-image" src={restaurantfood} width="332" height="362"/>
                 </div>
             </section>
             <section className="specials-container">
