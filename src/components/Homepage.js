@@ -1,4 +1,9 @@
+import { Link } from "react-router-dom";
 import restaurantfood from "../assets/restauranfood.jpg"
+import AboutUs from "./AboutUs";
+import Footer from "./Footer";
+import Specials from "./Specials";
+import Testimonials from "./Testimonials";
 
 function Homepage() {
     return(
@@ -14,17 +19,17 @@ function Homepage() {
                             We are a family owned Mediterranean restaurant, 
                             focused on traditional recipes served with a modern twist
                         </p>
-                        <button className="reserve-table-button btn">Reserve a Table</button>
+                        <Link to="/booking">
+                            <button className="reserve-table-button btn">Reserve a Table</button>
+                        </Link>
                     </div>
                     <img className="hero-image" src={restaurantfood} width="332" height="362"/>
                 </div>
             </section>
-            <section className="specials-container">
-                <div className="title-button-container">
-                    <h1 className="display-title">This weeks specials!</h1>
-                    <button className="order-online-button btn">Order Online</button>
-                </div>
-            </section>
+            <Specials />
+            <Testimonials />
+            <AboutUs />
+            <Footer />
         </main>
     )
 }
