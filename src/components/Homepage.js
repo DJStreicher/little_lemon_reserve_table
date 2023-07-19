@@ -23,7 +23,7 @@ function Homepage() {
                             <button className="reserve-table-button btn">Reserve a Table</button>
                         </Link>
                     </div>
-                    <img className="hero-image" src={restaurantfood} width="332" height="362"/>
+                    <img className="hero-image" src={restaurantfood} width="332" height="362" alt="Little Lemon food" loading="lazy" />
                 </div>
             </section>
             <Specials />

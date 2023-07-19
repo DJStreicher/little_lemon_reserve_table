@@ -9,12 +9,12 @@ function Navbar (){
             </button>
             <div className="nav-bar-logo-container">
                 <a href="/">
-                    <img src={process.env.PUBLIC_URL + 'logo.svg'} alt="Little Lemon logo" className="nav-logo" width="148" height="40"/>
+                    <img src={process.env.PUBLIC_URL + 'logo.svg'} alt="Little Lemon logo" className="nav-logo" width="148" height="40" loading="lazy" />
                 </a>
             </div>
             <ul className="nav-links-container">
                 <li><a href="/">Home</a></li>
-                <li><a href="/">About</a></li>
+                <li><a href="/#about-section">About</a></li>
                 <li><a href="/">Menu</a></li>
                 <li><a href="/">Reservations</a></li>
                 <li><a href="/">Order Online</a></li>

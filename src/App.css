@@ -2,6 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
 /**************global styles***************/
+/*look at doing the margins seperately for each section
+turn the margins into vars*/
+
 :root {
   --clr-green-primary: #495E57;
   --clr-yellow-primary: #F4CE14;
@@ -9,8 +12,17 @@
   --clr-orange-secondary: #EE9972;
   --clr-white-secondary: #EDEFEE;
   --clr-black-secondary: #333333;
+  --margin-sides-primary: 324px;
+  --margin-sides-secondary: 16px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+a:visited {
+  color: purple; /*make this work*/
+}
 .btn {
   padding: 12px 24px;
   width: max-content;
@@ -35,6 +47,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-top: 0;
 }
 .lead-text {
   font-family: "Karla";
@@ -43,12 +56,25 @@
   font-weight: 500;
   line-height: normal;
 }
-
+.card-title-text {
+  font-family: "Karla";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.paragraph-text {
+  font-family: "Karla";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 /**************nav bar styles***************/
 .nav-bar-container {
   width: calc(100vw - 64px);
-  margin-left: 32px;
-  margin-right: 32px;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 16px;
   margin-bottom: 16px;
   display: flex;
@@ -65,9 +91,9 @@
 }
 @media (orientation: landscape) {
   .nav-bar-container {
-    width: calc(100vw - 600px);
-    margin-left: 300px;
-    margin-right: 300px;
+    width: calc(100vw - 800px);
+    margin-left: auto;
+    margin-right: auto;
   }
   .nav-links-container {
     padding: 0;
@@ -94,8 +120,8 @@
 
 /**************hero styles***************/
 .home-hero-background-container {
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: var(--margin-sides-secondary);
+  padding-right: var(--margin-sides-secondary);
   background-color: var(--clr-green-primary);
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -142,8 +168,8 @@
 
 @media (orientation: landscape) {
   .home-hero-background-container {
-    padding-left: 264px;
-    padding-right: 264px;
+    padding-left: var(--margin-sides-primary);
+    padding-right: var(--margin-sides-primary);
     background-color: var(--clr-green-primary);
     display: grid;
     grid-template-rows: auto 1fr;
@@ -169,14 +195,262 @@
 }
 
 /**************specials styles***************/
+.specials-container {
+  margin: 32px var(--margin-sides-secondary);
+}
+.special-card-image {
+  width: 100%;
+  border-radius: inherit;
+}
+.special-card {
+  background-color: var(--clr-white-secondary);
+  border-radius: 16px 16px 0 0;
+}
+.card-heading-description-container {
+  display: flex;
+  flex-direction: column;
+}
+.card-heading-price-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.card-title-text.price {
+  color: var(--clr-orange-secondary);
+}
+.card-text-container {
+  height: 100%;
+  padding: 0 24px 0 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.specials-order {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.specials-cards-container {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
 @media (orientation: landscape) {
   .specials-container {
-    margin: 138px 264px;
+    margin: 138px var(--margin-sides-primary);
   }
   .title-button-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: start;
+  }
+  .specials-cards-container {
+    flex-direction: row;
+  }
+  .special-card {
+    width: 272px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/**************testimonials styles***************/
+.testimonials-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.testimonials-container > .sub-title {
+  align-self: center;
+}
+.testimonials-profile-pic {
+  border-radius: 50%;
+}
+.testimonial-cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  height: 320px;
+  width: 216px;
+  background-color: var(--clr-white-secondary);
+  border-radius: 16px 16px 0 0;
+}
+.testimonials-card-pic-name-contianer {
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.testimonials-card-comment {
+  padding: 0 12px;
+}
+.testimonials-card-rating {
+  border-radius: inherit;
+}
+@media (orientation: landscape) {
+  .testimonials-container {
+    margin-left: var(--margin-sides-primary);
+    margin-right: var(--margin-sides-primary);
+  }
+  .testimonial-cards-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: auto;
+  }
+}
+
+/**************about us styles***************/
+.about-us-container {
+  margin-top: 48px;
+  padding-left: var(--margin-sides-secondary);
+  padding-right: var(--margin-sides-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--clr-green-primary);
+}
+.about-us-text-container {
+  display: flex;
+  flex-direction: column;
+}
+.about-us-text-container > .paragraph-text {
+  color: var(--clr-white-secondary);
+}
+.about-us-text-container > .display-title {
+  margin: 24px 0 -24px 0;
+  color: var(--clr-yellow-primary);
+}
+.about-us-text-container > .sub-title {
+  margin: 0;
+  color: var(--clr-white-secondary);
+}
+.about-us-photos-container {
+  margin-bottom: 36px;
+}
+@media (orientation: landscape) {
+  .about-us-container {
+    height: 100vh;
+    padding-left: var(--margin-sides-primary);
+    padding-right: var(--margin-sides-primary);
+    flex-direction: row;
+  }
+  .about-us-text-container > .paragraph-text {
+    width: 50%;
+  }
+  .about-us-photos-container {
+    position: relative;
+    margin: auto;
+    width: max-content;
+    height: max-content;
+  }
+  .about-us-photo {
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    transform: translateY(25%);
+  }
+  .about-us-photo.a {
+    z-index: 1;
+  }
+  .about-us-photo.b {
+    transform: translate(-50%, 75%);
+    z-index: 0;
+  }
+}
+
+/**************footer styles***************/
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  margin: 24px 16px 0 16px;
+}
+.footer-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.contact-socials-container {
+  display: flex;
+  flex-direction: column;
+}
+.disclaimer-text {
+  place-self: center;
+  margin: 12px 0 0 0;
+  font-family: "Karla";
+}
+.socials-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.socials-container a {
+  fill: var(--clr-black-secondary);
+}
+.footer-contact-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+@media (orientation: landscape) {
+  .footer-container {
+    margin: 24px 128px 0 128px;
+  }
+}
+
+/**************booking page styles***************/
+.booking-page-container {
+  margin: 64px var(--margin-sides-secondary);
+}
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--clr-green-primary);
+  padding: 16px;
+  border-radius: 16px;
+}
+.label-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 64px;
+}
+.form-input {
+  width: max-content;
+  height: 56px;
+  padding-left: 16px;
+  background-color: var(--clr-white-secondary);
+  border: none;
+  border-radius: 8px;
+  color: var(--clr-black-secondary);
+}
+.form-label {
+  color: var(--clr-white-secondary);
+}
+input[type='number']{
+  width: 48px;
+}
+.form-error {
+  color: red;
+  font-family: "Karla";
+  font-size: 16px;
+}
+.btn:disabled {
+  background-color: #f4cf1457;
+}
+
+@media (orientation: landscape) {
+  .booking-page-container {
+    margin: 64px var(--margin-sides-primary);
   }
 }
