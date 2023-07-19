@@ -1,41 +1,73 @@
-import { useEffect } from "react";
-import { useFormik } from "formik";
-import * as Yup from 'yup';
+import { useEffect, useState } from "react";
 
 function BookingForm({availableTimes, dispatchAvailableTimes}) {
 
-    function reservationAlert(data) {
+    const DateErrorMessage = () => {
+        return(
+            <p className="form-error">Please enter a valid date</p>
+        );
+    };
+    const GuestsErrorMessage = () => {
+        return(
+            <p className="form-error">Please enter a number between 1 and 10</p>
+        );
+    };
+
+    const [resDate, setResDate] = useState({
+        value: "",
+        isTouched: false,
+    });
+    const [resTime, setResTime] = useState({
+        value: "17:00",
+        isTouched: false,
+    });
+    const [guests, setGuests] = useState({
+        value: "",
+        isTouched: false,
+    });
+    const [occasion, setOccasion] = useState({
+        value: "Birthday",
+        isTouched: false,
+    });
+
+    const getIsFormValid = () => {
+        return(
+            resDate.isTouched &&
+            resTime.isTouched &&
+            guests.value > 0 && guests.value < 11 &&
+            occasion.isTouched
+        );
+    };
+    const clearForm = () => {
+        setResDate({
+            value: "",
+            isTouched: false,
+        });
+        setResTime({
+            value: "17:00",
+            isTouched: false,
+        });
+        setGuests({
+            value: "",
+            isTouched: false,
+        });
+        setOccasion({
+            value: "Birthday",
+            isTouched: false,
+        })
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
         alert(
             `Thank you for making a reservation with Little Lemon\n
-            Date: ${data.resDate}
-            Time: ${data.resTime}
-            Number of guests: ${data.guests}
-            Occasion: ${data.occasion}`
+            Date: ${resDate.value}
+            Time: ${resTime.value}
+            Number of guests: ${guests.value}
+            Occasion: ${occasion.value}`
             )
-    }
+        clearForm();
 
-    const {values, handleChange, handleSubmit, errors, touched, resetForm} = useFormik({
-        initialValues: {
-            resDate: "",
-            resTime: availableTimes[0],
-            guests: "2",
-            occasion: "Birthday",
-        },
-        onSubmit: (values) => {
-            reservationAlert(values)
-        },
-        validationSchema: Yup.object({
-            guests: Yup.number()
-            .min(1, "can't be less than 1 person")
-            .max(10, "can't be more than 10 people")
-            .required("Required"),
-            date: Yup.date()
-            .max(new Date(), "Enter a valid date")
-            .required("Required"),
-            time: Yup.string()
-            .required("Required"),
-        }),
-    })
+    }
 
     const availableTimesOptions = availableTimes.map((time) => {
         return(
@@ -44,40 +76,50 @@ function BookingForm({availableTimes, dispatchAvailableTimes}) {
     })
 
     return(
-        <form onSubmit={(e) => {e.preventDefault(); handleSubmit(e)}} className="booking-form">
+        <form onSubmit={handleSubmit} className="booking-form">
             <div className="label-input-container">
                 <label htmlFor="resDate" className="form-label date lead-text">Choose date</label>
                 <input
                     type="date"
                     id="resDate"
                     className="form-input date paragraph-text"
-                    value={values.resDate}
-                    onChange={handleChange}
+                    value={resDate.value}
+                    onChange={e => setResDate({...resDate, value: e.target.value})}
+                    onBlur={() => {
+                        setResDate({...resDate, isTouched: true});
+                        }}
                 />
             </div>
-            {touched.resDate && errors.resDate ? (
-                <p>{errors.resDate}</p>
+            {resDate.isTouched && resDate.value.length < 8 ? (
+                <DateErrorMessage />
             ) : null }
             <div className="label-input-container">
                 <label htmlFor="resTime" className="form-label time lead-text">Choose time</label>
                 <select
                     id="resTime"
                     className="form-input time paragraph-text"
-                    values={values.resTime}
-                    onChange={handleChange}
+                    values={resTime.value}
+                    onChange={e => setResTime({...resTime, value: e.target.value})}
+                    onBlur={() => {
+                        setResTime({...resTime, isTouched: true})
+                        }}
                 >
                     {availableTimesOptions}
                 </select>
             </div>
-            {touched.resTime && errors.resTime ? (
-                <p>{errors.resTime}</p>
+            {resTime.isTouched && resTime.value.length < 1 ? (
+                <p>Please choose a time</p>
             ) : null }
             <div className="label-input-container">
                 <label htmlFor="guests" className="form-label guests lead-text">Number of guests</label>
                 <input
                     type="number"
-                    value={values.guests}
-                    onChange={handleChange}
+                    value={guests.value}
+                    onChange={e => setGuests({...guests, value: e.target.value})}
+                    onBlur={() => {
+                        setGuests({...guests, isTouched: true});
+                        console.log(guests.isTouched);
+                        }}
                     placeholder="2"
                     min="1"
                     max="10"
@@ -85,22 +127,25 @@ function BookingForm({availableTimes, dispatchAvailableTimes}) {
                     className="form-input guests paragraph-text"
                 />
             </div>
-            {touched.guests && errors.guests ? (
-                <p>{errors.guests}</p>
+            {guests.isTouched && (guests.value < 1 || guests.value > 10) ? (
+                <GuestsErrorMessage />
             ) : null }
             <div className="label-input-container">
                 <label htmlFor="occasion" className="form-label occasion lead-text">Occasion</label>
                 <select
                     id="occasion"
                     className="form-input occasion paragraph-text"
-                    values={values.occasion}
-                    onChange={handleChange}
+                    values={occasion.value}
+                    onChange={e => setOccasion({...occasion, value: e.target.value})}
+                    onBlur={() => {
+                        setOccasion({...occasion, isTouched: true})
+                        }}
                 >
                     <option className="form-option occasion">Birthday</option>
                     <option className="form-option occasion">Anniversary</option>
                 </select>
             </div>
-            <input type="submit" value="Make Your Rervation" className="form-submit btn"/>
+            <input type="submit" value="Make Your Rervation" className="form-submit btn" disabled={!getIsFormValid()} />
         </form>
     );
 }
